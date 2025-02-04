@@ -21,3 +21,21 @@ security:
     secret: d2tqZWRud2puYWprMTIzMjEzaGF0IHRoZSBkYXRhIHN0YXlzIHVuY2hhbmdlZCB3aXRob3V0IG1vZGlmaWNhdGlvbiBkdXJpbmcgdHJhbnNmZXIuIEJhc2U2NCBpcyBnZW5lcmFsbHkgdXNlZCBpbiBhIG51c2RtYmVyIG9mIGFwcGxpY2F0aW9ucyBpbmNsdWRpbmcgZWxlY3Ryb25pYyBtYWlsIHZpYSBNSU1FLCBhbmQga2VlcGluZyBjb21wbGV4IGluZm9ybWF0aW9uIGluIFhNTC4=
     access: 3_600_000
     refresh: 2_592_000_000
+
+logging:
+  level:
+    #    root: DEBUG
+    root: INFO
+    org:
+      hibernate:
+        SQL: INFO
+        type: INFO
+      springframework:
+        security: INFO
+  file:
+    name: "./logs/task.log"
+  pattern:
+    file: "%date{HH:mm:ss.SSS} | %5p | ${spring.application.name:} | %X{traceId} | %X{spanId} | %X{Session-ID} |
+      %X{clientIp} | [%F@%M:>-%L] - %m%n %throwable{full}"
+    console: "%yellow(%d{ISO8601}) | %highlight(%level) | %green(${spring.application.name:}) | 
+      %red(%X{traceId}) | %X{spanId} | %highlight(%X{Session-ID}) | %green([%F@%M:>-%L]) - %msg %red(%throwable{full}%n)"
