@@ -5,7 +5,19 @@ spring:
   config:
     import: optional:file:.env[.properties]
   datasource:
-    url: jdbc:postgresql://${HOST}:${HOST_PORT}/${POSTGRES_DB}
-    username: ${POSTGRES_USERNAME}
+#    url: jdbc:postgresql://${HOST}:${HOST_PORT}/${POSTGRES_DB}?currentSchema=${POSTGRES_DB}
+#    url: jdbc:postgresql://${HOST}:${HOST_PORT}/${POSTGRES_DB}?schema=public
+    url: jdbc:postgresql://localhost:5432/task_list_db
+    username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
+      continue-on-error: false
+      data-locations: classpath:demo_data.sql
+security:
+  jwt:
+    secret: d2tqZWRud2puYWprMTIzMjEzaGF0IHRoZSBkYXRhIHN0YXlzIHVuY2hhbmdlZCB3aXRob3V0IG1vZGlmaWNhdGlvbiBkdXJpbmcgdHJhbnNmZXIuIEJhc2U2NCBpcyBnZW5lcmFsbHkgdXNlZCBpbiBhIG51c2RtYmVyIG9mIGFwcGxpY2F0aW9ucyBpbmNsdWRpbmcgZWxlY3Ryb25pYyBtYWlsIHZpYSBNSU1FLCBhbmQga2VlcGluZyBjb21wbGV4IGluZm9ybWF0aW9uIGluIFhNTC4=
+    access: 3_600_000
+    refresh: 2_592_000_000

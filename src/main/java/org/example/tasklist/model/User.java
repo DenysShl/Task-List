@@ -1,7 +1,6 @@
 package org.example.tasklist.model;
 
 import lombok.Data;
-import org.springframework.scheduling.config.Task;
 
 import java.util.List;
 import java.util.Set;
@@ -10,7 +9,7 @@ import java.util.Set;
 public class User {
     private Long id;
     private String name;
-    private String userName;
+    private String username;
     private String password;
     private String passwordConfirmation;
     private Set<Role> roles;

@@ -7,7 +7,7 @@ import java.util.Optional;
 public interface UserService {
     User getById(Long id);
 
-    User getByUserName(String userName);
+    User getByUsername(String userName);
 
     User update(User user);
 

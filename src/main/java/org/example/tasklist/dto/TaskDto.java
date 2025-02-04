@@ -22,6 +22,8 @@ public class TaskDto {
 
     @Length(max = 255, message = "Title length must be smaller than 255 symbols.", groups = {OnCreate.class, OnUpdate.class})
     private String description;
+
+    @NotNull(message = "Status must be not null!")
     private Status status;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)

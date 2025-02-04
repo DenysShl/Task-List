@@ -10,11 +10,11 @@ public interface TaskRepository {
 
     List<Task> findAllByUserId(Long userId);
 
-    void assignToUserById(Long userId, Long taskId);
+    void assignToUserById(Long taskId, Long userId);
 
     void update(Task task);
 
     void create(Task task);
 
-    void delete(Task task);
+    void delete(Long taskId);
 }
