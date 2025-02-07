@@ -1,5 +1,6 @@
 package org.example.tasklist.repository;
 
+import org.apache.ibatis.annotations.Param;
 import org.example.tasklist.model.Task;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface TaskRepository {
 
     List<Task> findAllByUserId(Long userId);
 
-    void assignToUserById(Long taskId, Long userId);
+    void assignToUserById(@Param("taskId") Long taskId, @Param("userId") Long userId);
 
     void update(Task task);
 

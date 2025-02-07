@@ -22,6 +22,9 @@ security:
     access: 3_600_000
     refresh: 2_592_000_000
 
+mybatis:
+  mapper-location: classpath:mybatis/mapper/*.xml
+
 logging:
   level:
     #    root: DEBUG

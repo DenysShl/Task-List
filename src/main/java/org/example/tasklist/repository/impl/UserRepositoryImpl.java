@@ -3,21 +3,19 @@ package org.example.tasklist.repository.impl;
 import lombok.RequiredArgsConstructor;
 import org.example.tasklist.config.DataSourceConfig;
 import org.example.tasklist.exception.ResourceMappingException;
-import org.example.tasklist.mapper.TaskRowMapper;
 import org.example.tasklist.mapper.UserRowMapper;
 import org.example.tasklist.model.Role;
 import org.example.tasklist.model.User;
 import org.example.tasklist.repository.UserRepository;
 import org.springframework.stereotype.Repository;
 
-import java.io.StringReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-@Repository
+//@Repository
 @RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
 
