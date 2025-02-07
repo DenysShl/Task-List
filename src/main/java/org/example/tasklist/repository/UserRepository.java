@@ -7,7 +7,7 @@ import org.example.tasklist.model.User;
 
 import java.util.Optional;
 
-@Mapper
+//@Mapper
 public interface UserRepository {
     Optional<User> findById(Long id);
 

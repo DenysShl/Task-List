@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.springframework.boot.context.properties.source.ConfigurationPropertyName.isValid;
 
 @Service
 @RequiredArgsConstructor

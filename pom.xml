@@ -36,6 +36,7 @@
         <jakarta.validation.version>3.1.0</jakarta.validation.version>
         <jjwt.version>0.12.5</jjwt.version>
         <mybatis.version>3.0.1</mybatis.version>
+        <liquibase.version>4.31.0</liquibase.version>
 
         <checkstyle.version>3.3.1</checkstyle.version>
     </properties>
@@ -61,13 +62,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -85,7 +79,6 @@
             <version>${jjwt.version}</version>
             <scope>runtime</scope>
         </dependency>
-
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -118,6 +111,17 @@
             <artifactId>jakarta.validation-api</artifactId>
             <version>${jakarta.validation.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>${liquibase.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.springframework.security</groupId>
