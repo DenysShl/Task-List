@@ -1,11 +1,13 @@
 package org.example.tasklist.repository;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.example.tasklist.model.Role;
 import org.example.tasklist.model.User;
 
 import java.util.Optional;
 
+//@Mapper
 public interface UserRepository {
     Optional<User> findById(Long id);
 

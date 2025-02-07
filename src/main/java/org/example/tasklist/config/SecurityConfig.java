@@ -37,11 +37,11 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(final HttpSecurity httpSecurity) {
+    public SecurityFilterChain filterChain(final HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
-                .httpBasic(AbstractHttpConfigurer::disable)
+//                .csrf(AbstractHttpConfigurer::disable)
+//                .cors(AbstractHttpConfigurer::disable)
+//                .httpBasic(AbstractHttpConfigurer::disable)
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
@@ -75,7 +75,7 @@ public class SecurityConfig {
                                 .permitAll()
                                 .anyRequest().authenticated()
                 )
-                .anonymous(AbstractHttpConfigurer::disable)
+//                .anonymous(AbstractHttpConfigurer::disable)
                 .addFilterBefore(
                         new JwtTokenFilter(tokenProvider),
                         UsernamePasswordAuthenticationFilter.class
