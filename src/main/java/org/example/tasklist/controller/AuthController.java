@@ -1,5 +1,7 @@
 package org.example.tasklist.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.example.tasklist.dto.UserDto;
 import org.example.tasklist.mapper.UserMapper;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 @Validated
+@Tag(name = "Authentication")
 public class AuthController {
 
     private final AuthService authService;
@@ -26,11 +29,13 @@ public class AuthController {
     private final UserMapper userMapper;
 
     @PostMapping("/login")
+    @Operation(summary = "Login")
     public JwtResponse login(@Validated @RequestBody final JwtRequest jwtRequest) {
         return authService.login(jwtRequest);
     }
 
     @PostMapping("/register")
+    @Operation(summary = "Register")
     public UserDto register(@Validated(OnCreate.class) @RequestBody final UserDto userDto) {
         User user = userMapper.toModel (userDto);
         User createdUser = userService.create(user);
@@ -38,6 +43,7 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
+    @Operation(summary = "Refresh token")
     public JwtResponse refresh(@RequestBody final String refreshToken) {
         return authService.refresh(refreshToken);
     }

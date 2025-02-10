@@ -52,3 +52,6 @@ logging:
       %X{clientIp} | [%F@%M:>-%L] - %m%n %throwable{full}"
     console: "%yellow(%d{ISO8601}) | %highlight(%level) | %green(${spring.application.name:}) | 
       %red(%X{traceId}) | %X{spanId} | %highlight(%X{Session-ID}) | %green([%F@%M:>-%L]) - %msg %red(%throwable{full}%n)"
+
+springdoc:
+  override-with-generic-response: false
