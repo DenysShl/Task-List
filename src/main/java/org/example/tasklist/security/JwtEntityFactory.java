@@ -1,11 +1,6 @@
 package org.example.tasklist.security;
 
-import org.example.tasklist.model.Role;
 import org.example.tasklist.model.User;
-import org.springframework.security.core.GrantedAuthority;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class JwtEntityFactory {
 

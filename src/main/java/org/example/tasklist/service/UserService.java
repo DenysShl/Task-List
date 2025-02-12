@@ -2,8 +2,6 @@ package org.example.tasklist.service;
 
 import org.example.tasklist.model.User;
 
-import java.util.Optional;
-
 public interface UserService {
     User getById(Long id);
 
