@@ -5,6 +5,7 @@ import org.example.tasklist.exception.ResourceNotFoundException;
 import org.example.tasklist.model.Role;
 import org.example.tasklist.model.User;
 import org.example.tasklist.repository.UserRepository;
+import org.example.tasklist.repository.UserRepositoryJdbc;
 import org.example.tasklist.service.UserService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -49,7 +50,7 @@ public class UserServiceImpl implements UserService {
     })
     public User update(final User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.update(user);
+        userRepository.save(user);
         return user;
     }
 
@@ -67,10 +68,9 @@ public class UserServiceImpl implements UserService {
             throw new IllegalStateException("Password and password confirmation do not match.");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.create(user);
         Set<Role> roles = Set.of(Role.ROLE_USER);
-        userRepository.insertUserRole(user.getId(), Role.ROLE_USER);
         user.setRoles(roles);
+        userRepository.save(user);
         return user;
     }
 
@@ -85,6 +85,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @CacheEvict(value = "UserService::getById", key = "#userId") //this annotation delete cache
     public void delete(final Long userId) {
-        userRepository.delete(userId);
+        userRepository.deleteById(userId);
     }
 }

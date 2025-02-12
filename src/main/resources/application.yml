@@ -38,8 +38,8 @@ security:
     access: 1 #hour
     refresh: 30 #days 2_592_000_000
 
-mybatis:
-  mapper-location: classpath:mybatis/mapper/*.xml
+#mybatis:
+#  mapper-location: classpath:mybatis/mapper/*.xml
 
 logging:
   level:

@@ -14,16 +14,19 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-//@Entity
-//@Table(name = "tasks")
+@Entity
+@Table(name = "tasks")
 public class Task implements Serializable {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
     private String description;
-//    @Enumerated(EnumType.STRING)
+
+    @Enumerated(value = EnumType.STRING)
     private Status status;
-//    @Column(name = "expiration_date")
+
+    @Column(name = "expiration_date")
     private LocalDateTime expirationDate;
 }
