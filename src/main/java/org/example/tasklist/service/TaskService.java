@@ -1,6 +1,7 @@
 package org.example.tasklist.service;
 
 import org.example.tasklist.model.Task;
+import org.example.tasklist.model.TaskImage;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface TaskService {
     Task create(Task task, Long userId);
 
     void delete(Long id);
+
+    void uploadImage(Long id, TaskImage image);
 }
