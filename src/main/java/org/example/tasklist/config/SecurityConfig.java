@@ -8,8 +8,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
+import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -20,6 +24,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor(onConstructor_ = @__(@Lazy))
 public class SecurityConfig {
 
@@ -37,11 +42,11 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(final HttpSecurity httpSecurity) {
+    public SecurityFilterChain filterChain(final HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
-                .httpBasic(AbstractHttpConfigurer::disable)
+//                .csrf(AbstractHttpConfigurer::disable)
+//                .cors(AbstractHttpConfigurer::disable)
+//                .httpBasic(AbstractHttpConfigurer::disable)
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
@@ -65,22 +70,29 @@ public class SecurityConfig {
                                 )
                 )
                 .authorizeHttpRequests(configurer ->
-                        configurer.requestMatchers("/api/v1/auth/**")
+                        configurer.requestMatchers("/tasklist/api/v1/auth/**")
                                 .permitAll()
-                                .requestMatchers("/swagger-ui/**")
+                                .requestMatchers("/tasklist/swagger-ui/**")
                                 .permitAll()
-                                .requestMatchers("/v3/api-docs/**")
+                                .requestMatchers("/tasklist/v3/api-docs/**")
                                 .permitAll()
-                                .requestMatchers("/graphiql")
+                                .requestMatchers("/tasklist/graphiql")
                                 .permitAll()
                                 .anyRequest().authenticated()
                 )
-                .anonymous(AbstractHttpConfigurer::disable)
+//                .anonymous(AbstractHttpConfigurer::disable)
                 .addFilterBefore(
                         new JwtTokenFilter(tokenProvider),
                         UsernamePasswordAuthenticationFilter.class
                 );
 
         return httpSecurity.build();
+    }
+
+    @Bean
+    public MethodSecurityExpressionHandler expressionHandler() {
+        DefaultMethodSecurityExpressionHandler expressionHandler = new DefaultMethodSecurityExpressionHandler();
+        expressionHandler.setApplicationContext(applicationContext);
+        return expressionHandler;
     }
 }

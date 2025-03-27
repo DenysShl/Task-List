@@ -1,29 +1,45 @@
+server:
+  port: 8197
+  servlet:
+    context-path: /tasklist
+
 spring:
   application:
     name: Task-List
-
   config:
     import: optional:file:.env[.properties]
+  cache:
+    type: redis
+    cache-names: redis-cache
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_HOST_PORT}
+      password: ${REDIS_PASSWORD}
   datasource:
-#    url: jdbc:postgresql://${HOST}:${HOST_PORT}/${POSTGRES_DB}?currentSchema=${POSTGRES_DB}
-#    url: jdbc:postgresql://${HOST}:${HOST_PORT}/${POSTGRES_DB}?schema=public
-    url: jdbc:postgresql://localhost:5432/task_list_db
+    url: jdbc:postgresql://${HOST}:${HOST_PORT}/${POSTGRES_DB}?currentSchema=${POSTGRES_SCHEMA}
+#    url: jdbc:postgresql://localhost:5432/task_list_db
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
-  sql:
-    init:
-      mode: always
-      continue-on-error: false
-      data-locations: classpath:demo_data.sql
+#  sql:
+#    init:
+#      mode: never
+#      continue-on-error: false
+#      data-locations: classpath:demo_data.sql
+  liquibase:
+    change-log: classpath:liquibase/db.changelog.yaml
+    enabled: true
+    default-schema: ${POSTGRES_DB}
+
 security:
   jwt:
-    secret: d2tqZWRud2puYWprMTIzMjEzaGF0IHRoZSBkYXRhIHN0YXlzIHVuY2hhbmdlZCB3aXRob3V0IG1vZGlmaWNhdGlvbiBkdXJpbmcgdHJhbnNmZXIuIEJhc2U2NCBpcyBnZW5lcmFsbHkgdXNlZCBpbiBhIG51c2RtYmVyIG9mIGFwcGxpY2F0aW9ucyBpbmNsdWRpbmcgZWxlY3Ryb25pYyBtYWlsIHZpYSBNSU1FLCBhbmQga2VlcGluZyBjb21wbGV4IGluZm9ybWF0aW9uIGluIFhNTC4=
-    access: 3_600_000
-    refresh: 2_592_000_000
+    secret: ${JWT_SECRET}
+    access: 1 #hour
+    refresh: 30 #days 2_592_000_000
 
-mybatis:
-  mapper-location: classpath:mybatis/mapper/*.xml
+#mybatis:
+#  mapper-location: classpath:mybatis/mapper/*.xml
 
 logging:
   level:
@@ -42,3 +58,12 @@ logging:
       %X{clientIp} | [%F@%M:>-%L] - %m%n %throwable{full}"
     console: "%yellow(%d{ISO8601}) | %highlight(%level) | %green(${spring.application.name:}) | 
       %red(%X{traceId}) | %X{spanId} | %highlight(%X{Session-ID}) | %green([%F@%M:>-%L]) - %msg %red(%throwable{full}%n)"
+
+springdoc:
+  override-with-generic-response: false
+
+minio:
+  bucket: ${MINIO_BUCKET}
+  url: ${MINIO_URL}
+  accessKey: ${MINIO_ACCESS_KEY}
+  secretKey: ${MINIO_SECRET_KEY}

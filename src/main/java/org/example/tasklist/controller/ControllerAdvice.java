@@ -5,7 +5,9 @@ import org.example.tasklist.exception.AccessDeniedException;
 import org.example.tasklist.exception.ExceptionBody;
 import org.example.tasklist.exception.ResourceMappingException;
 import org.example.tasklist.exception.ResourceNotFoundException;
+import org.example.tasklist.exception.UploadException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -66,6 +68,18 @@ public class ControllerAdvice {
 
                 )));
         return exceptionBody;
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionBody handleAuthenticationException(AuthenticationException e) {
+        return new ExceptionBody("Authentication failed!");
+    }
+
+    @ExceptionHandler(UploadException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionBody handleUploadException(UploadException e) {
+        return new ExceptionBody("Upload failed!, " + e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)

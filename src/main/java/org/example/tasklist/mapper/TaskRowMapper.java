@@ -31,7 +31,7 @@ public class TaskRowMapper {
     }
 
     @SneakyThrows
-    public static List<Task> mapRowToTasks(ResultSet resultSet) {
+    public static List<Task> mapRowToTasks(final ResultSet resultSet) {
         List<Task> tasks = new ArrayList<>();
         while (resultSet.next()) {
             Task task = new Task();

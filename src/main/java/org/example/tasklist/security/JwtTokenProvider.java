@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.springframework.boot.context.properties.source.ConfigurationPropertyName.isValid;
 
 @Service
 @RequiredArgsConstructor
@@ -42,7 +41,9 @@ public class JwtTokenProvider {
         this.key = Keys.hmacShaKeyFor(jwtProperties.getSecret().getBytes());
     }
 
-    public String createAccessToken(final Long userId, final String username, final Set<Role> roles) {
+    public String createAccessToken(final Long userId,
+                                    final String username,
+                                    final Set<Role> roles) {
         Claims claims = Jwts.claims()
                 .subject(username)
                 .add("id", userId)
@@ -66,7 +67,8 @@ public class JwtTokenProvider {
                 .collect(Collectors.toList());
     }
 
-    public String createRefreshToken(final Long userId, final String username) {
+    public String createRefreshToken(final Long userId,
+                                     final String username) {
         Claims claims = Jwts.claims()
                 .subject(username)
                 .add("id", userId)

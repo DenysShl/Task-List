@@ -1,7 +1,7 @@
 package org.example.tasklist.exception;
 
 public class AccessDeniedException extends RuntimeException {
-    public AccessDeniedException(String message) {
+    public AccessDeniedException(final String message) {
         super(message);
     }
 }
