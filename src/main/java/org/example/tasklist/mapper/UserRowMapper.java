@@ -17,7 +17,7 @@ public class UserRowMapper {
     @SneakyThrows
     public static User mapRow(ResultSet resultSet) {
         Set<Role> roles = new HashSet<>();
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             roles.add(Role.valueOf(resultSet.getString("user_role_role")));
         }
         resultSet.beforeFirst();
@@ -34,5 +34,5 @@ public class UserRowMapper {
             return user;
         }
         return null;
-     }
+    }
 }

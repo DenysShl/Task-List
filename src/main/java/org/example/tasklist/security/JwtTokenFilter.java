@@ -18,7 +18,9 @@ public class JwtTokenFilter extends GenericFilterBean {
     private final JwtTokenProvider jwtTokenProvider;
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest,
+                         ServletResponse servletResponse,
+                         FilterChain filterChain) throws IOException, ServletException {
         String bearerToken = ((HttpServletRequest) servletRequest).getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             bearerToken = bearerToken.substring(7);
@@ -32,6 +34,7 @@ public class JwtTokenFilter extends GenericFilterBean {
                 }
             }
         } catch (Exception ignored) {
+            logger.warn("Anything to doing");
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }

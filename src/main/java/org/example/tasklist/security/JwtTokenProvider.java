@@ -25,13 +25,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
 @Service
 @RequiredArgsConstructor
 public class JwtTokenProvider {
 
     private final JwtProperties jwtProperties;
-
     private final UserDetailsService userDetailsService;
     private final UserService userService;
     private SecretKey key;

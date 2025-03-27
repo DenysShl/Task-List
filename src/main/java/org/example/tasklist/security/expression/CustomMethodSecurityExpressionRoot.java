@@ -10,7 +10,9 @@ import org.springframework.security.core.Authentication;
 
 @Getter
 @Setter
-public class CustomMethodSecurityExpressionRoot extends SecurityExpressionRoot implements MethodSecurityExpressionOperations {
+public class CustomMethodSecurityExpressionRoot
+        extends SecurityExpressionRoot
+        implements MethodSecurityExpressionOperations {
 
     private Object filterObject;
     private Object returnObject;

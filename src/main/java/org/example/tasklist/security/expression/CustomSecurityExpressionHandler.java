@@ -15,7 +15,9 @@ public class CustomSecurityExpressionHandler extends DefaultMethodSecurityExpres
     private final AuthenticationTrustResolver trustResolver = new AuthenticationTrustResolverImpl();
 
     @Override
-    protected MethodSecurityExpressionOperations createSecurityExpressionRoot(Authentication authentication, MethodInvocation invocation) {
+    protected MethodSecurityExpressionOperations createSecurityExpressionRoot(
+            Authentication authentication,
+            MethodInvocation invocation) {
         CustomMethodSecurityExpressionRoot root = new CustomMethodSecurityExpressionRoot(authentication);
         root.setTrustResolver(trustResolver);
         root.setPermissionEvaluator(getPermissionEvaluator());

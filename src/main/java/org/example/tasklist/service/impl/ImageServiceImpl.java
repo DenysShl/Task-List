@@ -21,7 +21,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ImageServiceImpl implements ImageService {
 
-    private  final MinioProperties minioProperties;
+    private final MinioProperties minioProperties;
     private final MinioClient minioClient;
 
     @Override
@@ -45,7 +45,6 @@ public class ImageServiceImpl implements ImageService {
         } catch (IOException e) {
             throw new UploadException("Error while uploading file: " + e.getMessage());
         }
-//        minioClient.putObject(minioProperties.getBucket(), image.getName(), image.getFile());
         return fileName;
     }
 

@@ -5,7 +5,6 @@ import org.example.tasklist.exception.ResourceNotFoundException;
 import org.example.tasklist.model.Role;
 import org.example.tasklist.model.User;
 import org.example.tasklist.repository.UserRepository;
-import org.example.tasklist.repository.UserRepositoryJdbc;
 import org.example.tasklist.service.UserService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
