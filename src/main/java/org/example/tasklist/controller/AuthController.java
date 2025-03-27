@@ -37,7 +37,7 @@ public class AuthController {
     @PostMapping("/register")
     @Operation(summary = "Register")
     public UserDto register(@Validated(OnCreate.class) @RequestBody final UserDto userDto) {
-        User user = userMapper.toModel (userDto);
+        User user = userMapper.toModel(userDto);
         User createdUser = userService.create(user);
         return userMapper.toDto(createdUser);
     }
