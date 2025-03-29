@@ -31,6 +31,10 @@ spring:
     change-log: classpath:liquibase/db.changelog.yaml
     enabled: true
     default-schema: ${POSTGRES_DB}
+  graphql:
+    graphiql:
+      enabled: true
+      path: /tasklist/graphiql
 
 security:
   jwt:
