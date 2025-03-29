@@ -11,6 +11,9 @@ import org.example.tasklist.model.Task;
 import org.example.tasklist.model.TaskImage;
 import org.example.tasklist.service.TaskService;
 import org.example.tasklist.validation.OnUpdate;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,8 +37,9 @@ public class TaskController {
     private final TaskImageMapper taskImageMapper;
 
     @PutMapping()
+    @MutationMapping(name = "updateTask")
     @Operation(summary = "Update task")
-    public TaskDto update(@Validated(OnUpdate.class) @RequestBody TaskDto taskDto) {
+    public TaskDto update(@Validated(OnUpdate.class) @RequestBody @Argument(name = "dto") TaskDto taskDto) {
         return taskMapper.toDto(
                 taskService.update(
                         taskMapper.toModel(taskDto)
@@ -44,15 +48,17 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
+    @QueryMapping(name = "taskById")
     @Operation(summary = "Get task by id")
-    public TaskDto getById(@PathVariable Long id) {
+    public TaskDto getById(@PathVariable @Argument(name = "id") Long id) {
         Task task = taskService.getById(id);
         return taskMapper.toDto(task);
     }
 
     @DeleteMapping("/{id}")
+    @MutationMapping(name = "deleteTask")
     @Operation(summary = "Delete task by id")
-    public void deletedById(@PathVariable("id") Long id) {
+    public void deletedById(@PathVariable("id") @Argument(name = "id") Long id) {
         taskService.delete(id);
     }
 
