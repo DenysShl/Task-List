@@ -82,8 +82,10 @@ public class UserController {
     @MutationMapping(name = "createTask")
     @Operation(summary = "Create task by user id")
     @PreAuthorize("@customSecurityExpression.canAccessUser(#id)")
-    public TaskDto createTask(@PathVariable @Argument(name = "id" ) Long id,
-                              @Validated(OnCreate.class) @RequestBody @Argument(name = "taskDto") TaskDto taskDto) {
+    public TaskDto createTask(
+            @PathVariable @Argument(name = "id") Long id,
+            @Validated(OnCreate.class) @RequestBody @Argument(name = "taskDto") TaskDto taskDto
+    ) {
         return taskMapper.toDto(
                 taskService.create(
                         taskMapper.toModel(taskDto), id

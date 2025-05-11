@@ -21,7 +21,7 @@ public class LocalDateTimeCoercing implements Coercing<LocalDateTime, String> {
     @Override
     public String serialize(
             @NotNull final Object dataFetcherResult,
-            @NotNull final GraphQLContext graphQLContext,
+            @NotNull final GraphQLContext graphQlContext,
             @NotNull final Locale locale
     ) {
         SimpleDateFormat formatter
@@ -32,30 +32,26 @@ public class LocalDateTimeCoercing implements Coercing<LocalDateTime, String> {
                         .atZone(ZoneId.systemDefault())
                         .toInstant())
         );
-//        return Coercing.super.serialize(dataFetcherResult, graphQLContext, locale);
     }
 
+    @Nullable
+    @Override
+    public LocalDateTime parseValue(
+            @NotNull Object input,
+            @NotNull GraphQLContext graphQlContext,
+            @NotNull Locale locale
+    ) throws CoercingParseValueException {
+        return LocalDateTime.parse((String) input);
+    }
 
-@Nullable
-@Override
-public LocalDateTime parseValue(
-        @NotNull Object input,
-        @NotNull GraphQLContext graphQLContext,
-        @NotNull Locale locale
-) throws CoercingParseValueException {
-    return LocalDateTime.parse((String) input);
-//    return Coercing.super.parseValue(input, graphQLContext, locale);
-}
-
-@Nullable
-@Override
-public LocalDateTime parseLiteral(
-        @NotNull Value<?> input,
-        @NotNull CoercedVariables variables,
-        @NotNull GraphQLContext graphQLContext,
-        @NotNull Locale locale
-) throws CoercingParseLiteralException {
-    return LocalDateTime.parse(((StringValue) input).getValue());
-//    return Coercing.super.parseLiteral(input, variables, graphQLContext, locale);
-}
+    @Nullable
+    @Override
+    public LocalDateTime parseLiteral(
+            @NotNull Value<?> input,
+            @NotNull CoercedVariables variables,
+            @NotNull GraphQLContext graphQlContext,
+            @NotNull Locale locale
+    ) throws CoercingParseLiteralException {
+        return LocalDateTime.parse(((StringValue) input).getValue());
+    }
 }
