@@ -1,0 +1,29 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+  # external_labels:
+  #   monitor: 'iguana-be-local'
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['prometheus_container:9090']
+
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets: ['node-exporter_container:9100']
+
+  - job_name: 'cadvisor'
+    scrape_interval: 10s
+    static_configs:
+      - targets: ['cadvisor_container:9190']
+
+  - job_name: 'inextbe'
+    metrics_path: '/metrics'  # або /actuator/prometheus, якщо це Spring Boot
+    static_configs:
+      - targets: ['iguana-be-local:8181']
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ['alert-manager_container:9093']
