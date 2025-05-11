@@ -86,4 +86,13 @@ public class UserServiceImpl implements UserService {
     public void delete(final Long userId) {
         userRepository.deleteById(userId);
     }
+
+    @Transactional(readOnly = true)
+    @Cacheable(value = "UserService::getTaskAuthor", key = "#taskId")
+    @Override
+    public User getTaskAuthor(Long taskId) {
+        return userRepository.findTaskAuthor(taskId).orElseThrow(
+                () -> new ResourceNotFoundException("User not found.")
+        );
+    }
 }
