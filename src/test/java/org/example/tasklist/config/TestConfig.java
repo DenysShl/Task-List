@@ -1,5 +1,6 @@
 package org.example.tasklist.config;
 
+import freemarker.template.Configuration;
 import io.minio.MinioClient;
 import lombok.RequiredArgsConstructor;
 import org.example.tasklist.repository.TaskRepository;
@@ -11,12 +12,15 @@ import org.example.tasklist.service.TaskService;
 import org.example.tasklist.service.UserService;
 import org.example.tasklist.service.impl.AuthServiceImpl;
 import org.example.tasklist.service.impl.ImageServiceImpl;
+import org.example.tasklist.service.impl.MailServiceImpl;
 import org.example.tasklist.service.impl.TaskServiceImpl;
 import org.example.tasklist.service.impl.UserServiceImpl;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+
 import org.springframework.context.annotation.Primary;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -61,21 +65,21 @@ public class TestConfig {
         return properties;
     }
 
-//    @Bean
-//    public Configuration configuration() {
-//        return Mockito.mock(Configuration.class);
-//    }
-//
-//    @Bean
-//    public JavaMailSender mailSender() {
-//        return Mockito.mock(JavaMailSender.class);
-//    }
-//
-//    @Bean
-//    @Primary
-//    public MailServiceImpl mailService() {
-//        return new MailServiceImpl(configuration(), mailSender());
-//    }
+    @Bean
+    public Configuration configuration() {
+        return Mockito.mock(Configuration.class);
+    }
+
+    @Bean
+    public JavaMailSender mailSender() {
+        return Mockito.mock(JavaMailSender.class);
+    }
+
+    @Bean
+    @Primary
+    public MailServiceImpl mailService() {
+        return new MailServiceImpl(configuration(), mailSender());
+    }
 
     @Bean
     @Primary

@@ -3,6 +3,7 @@ package org.example.tasklist.service;
 import org.example.tasklist.model.Task;
 import org.example.tasklist.model.TaskImage;
 
+import java.time.Duration;
 import java.util.List;
 
 public interface TaskService {
@@ -17,4 +18,6 @@ public interface TaskService {
     void delete(Long id);
 
     void uploadImage(Long id, TaskImage image);
+
+    List<Task> getAllSoonTasks(Duration duration);
 }

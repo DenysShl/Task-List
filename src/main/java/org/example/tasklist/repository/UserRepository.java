@@ -24,4 +24,16 @@ public interface UserRepository extends JpaRepository<User, Long> {
                 and ut.task_id = :taskId)
             """, nativeQuery = true)
     boolean isTaskOwner(@Param("userId") Long userId, @Param("taskId") Long taskId);
+
+    @Query(value = """
+            select 
+            u.id as id,                
+            u.name as name,
+            u.username as username,
+            u.password as password
+            from users_tasks ut
+            join users u on ut.task_id = t.id            
+            where ut.task_id = :taskId
+            """, nativeQuery = true)
+    Optional<User> findTaskAuthor(@Param("taskId") Long taskId);
 }
